@@ -1,0 +1,45 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; {currentYear} mosessmax. all rights reserved.</p>
+        <nav>
+            <ul>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>
+
+<style>
+    .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem 0;
+        text-align: center;
+    }
+    .footer .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    .footer nav ul {
+        list-style: none;
+        padding: 0;
+    }
+    .footer nav ul li {
+        display: inline;
+        margin: 0 0.5rem;
+    }
+    .footer nav ul li a {
+        color: #fff;
+        text-decoration: none;
+    }
+    .footer nav ul li a:hover {
+        text-decoration: underline;
+    }
+</style>

@@ -1,0 +1,118 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+import '@fontsource/geist-mono';
+import { ViewTransitions } from "astro:transitions";
+import { SEO } from "astro-seo";
+---
+
+<!doctype html>
+<html lang=en>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <SEO
+      title={title}
+      titleTemplate="%s :: Astro Complete Starter by Moses"
+      description={description}
+      canonical={Astro.url.toString()}
+      openGraph={{
+        basic: {
+          title: "Astro Complete Starter",
+          type: "website",
+          image: "",
+        },
+        image: {
+          alt: "Astro Starter by Moses",
+        },
+        optional:{
+          description: description,
+        }
+      }}
+      twitter={{
+        creator: "@mosessmax",
+      }}
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml" />
+    <ViewTransitions />
+  </head>
+  <body>
+
+    <slot />
+
+    <style is:global>
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+
+      @font-face {
+        font-family: "Geist Sans";
+        src: url("/fonts/geist-sans-latin-500-normal.woff2") format("woff2");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Geist Sans";
+        src: url("/fonts/geist-sans-latin-900-normal.woff2") format("woff2");
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @layer base {
+        html {
+          font-family: "Geist Mono", monospace;
+          @apply scroll-smooth uppercase;
+        }
+
+        body {
+          @apply antialiased fluid-base;
+        }
+
+        * {
+          @apply focus-visible:ring focus:outline-none;
+        }
+
+        .container {
+          width: 93% !important;
+          max-width: unset !important;
+          @apply px-4 md:px-10;
+        }
+      }
+    </style>
+
+    <script>
+      function hasHash() {
+        // Check if there is a hash in the URL and if an element with that ID exists
+        if (
+          window.location.hash &&
+          document.getElementById(window.location.hash.substring(1))
+        ) {
+          // Get the ID from the hash
+          const hash = window.location.hash.substring(1);
+          // Get the element with the ID from the hash
+          const element = document.getElementById(hash);
+          // Get the position of the element
+          const y = element.getBoundingClientRect().top + window.scrollY;
+          // Scroll to the element
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        hasHash();
+      });
+
+      document.addEventListener("astro:after-swap", () => {
+        hasHash();
+      });
+    </script>
+  </body>
+</html>
